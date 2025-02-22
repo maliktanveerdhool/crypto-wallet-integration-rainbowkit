@@ -42,17 +42,17 @@ const Index = () => {
     try {
       const ethAmount = job.budget.replace(" ETH", "");
       
-      // Using sendTransactionAsync to properly handle the promise
-      const tx = await sendTransactionAsync({
+      toast.success("Please confirm the transaction in your wallet");
+      
+      // Send the transaction and get the hash
+      const hash = await sendTransactionAsync({
         to: job.address as `0x${string}`,
         value: parseEther(ethAmount),
       });
 
-      toast.success("Please confirm the transaction in your wallet");
-      
-      // Wait for transaction confirmation
-      await tx.wait();
-      toast.success("Transaction confirmed!");
+      if (hash) {
+        toast.success("Transaction submitted!");
+      }
     } catch (error: any) {
       console.error('Transaction error:', error);
       toast.error(error?.message || "Transaction failed. Please try again.");
