@@ -8,6 +8,7 @@ interface JobCardProps {
   description: string;
   budget: string;
   status: 'open' | 'in-progress' | 'completed';
+  address: string;
   onSubmitProposal?: () => void;
 }
 

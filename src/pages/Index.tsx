@@ -2,12 +2,16 @@
 import { Layout } from "@/components/Layout";
 import { JobCard } from "@/components/JobCard";
 import { Button } from "@/components/ui/button";
-import { useAccount } from 'wagmi';
+import { useAccount, useWalletClient, useSendTransaction } from 'wagmi';
 import { useState } from "react";
 import { toast } from "sonner";
+import { parseEther } from 'viem';
 
 const Index = () => {
   const { isConnected } = useAccount();
+  const { data: walletClient } = useWalletClient();
+  const { sendTransaction } = useSendTransaction();
+
   const [jobs] = useState([
     {
       id: 1,
@@ -15,6 +19,7 @@ const Index = () => {
       description: "Looking for an experienced writer to create a comprehensive blog post about Web3 technology and its implications for the future of the internet.",
       budget: "0.1 ETH",
       status: "open" as const,
+      address: "0x123..." // This should be the actual wallet address of the job poster
     },
     {
       id: 2,
@@ -22,16 +27,32 @@ const Index = () => {
       description: "Need a professional writer to create a detailed white paper for our new DeFi protocol. Must have experience in cryptocurrency and financial writing.",
       budget: "0.3 ETH",
       status: "in-progress" as const,
+      address: "0x456..." // This should be the actual wallet address of the job poster
     },
   ]);
 
-  const handleSubmitProposal = (jobId: number) => {
+  const handleSubmitProposal = async (jobId: number) => {
     if (!isConnected) {
       toast.error("Please connect your wallet first");
       return;
     }
-    toast.success("Proposal submitted successfully!");
-    console.log('Submit proposal for job:', jobId);
+
+    const job = jobs.find(j => j.id === jobId);
+    if (!job) return;
+
+    try {
+      const ethAmount = job.budget.replace(" ETH", "");
+      
+      await sendTransaction({
+        to: job.address,
+        value: parseEther(ethAmount),
+      });
+
+      toast.success("Transaction initiated! Please confirm in your wallet.");
+    } catch (error) {
+      console.error('Transaction error:', error);
+      toast.error("Transaction failed. Please try again.");
+    }
   };
 
   const handlePostJob = () => {
