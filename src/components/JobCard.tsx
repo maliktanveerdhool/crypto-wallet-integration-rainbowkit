@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,7 +38,7 @@ export const JobCard = ({ title, description, budget, status, onSubmitProposal }
           className="w-full"
           disabled={!onSubmitProposal}
         >
-          {onSubmitProposal ? 'SubmitProposal' : 'Connect Wallet to Submit'}
+          {onSubmitProposal ? 'Buy Now' : 'Connect Wallet to Submit'}
         </Button>
       )}
     </Card>
