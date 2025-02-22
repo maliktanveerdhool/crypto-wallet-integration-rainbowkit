@@ -1,6 +1,6 @@
 
 import '@rainbow-me/rainbowkit/styles.css';
-import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
 import { WagmiConfig } from 'wagmi';
 import { config, chains } from '@/lib/web3Config';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -17,7 +17,11 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <WagmiConfig config={config}>
-      <RainbowKitProvider modalSize="compact">
+      <RainbowKitProvider
+        modalSize="compact"
+        theme={darkTheme()}
+        chains={chains}
+      >
         <TooltipProvider>
           <Toaster />
           <Sonner />

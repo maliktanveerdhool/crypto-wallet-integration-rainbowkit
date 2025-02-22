@@ -1,16 +1,24 @@
 
-import { getDefaultWallets } from '@rainbow-me/rainbowkit';
+import { connectorsForWallets } from '@rainbow-me/rainbowkit';
+import {
+  metaMaskWallet,
+  coinbaseWallet,
+} from '@rainbow-me/rainbowkit/wallets';
 import { http } from 'viem';
 import { createConfig } from 'wagmi';
 import { mainnet, polygon } from 'wagmi/chains';
 
-// Create wagmi config
-const walletConnectProjectId = '45ce2599389325d3414e9ad2876b4754'; // WalletConnect Project ID
+const walletConnectProjectId = '45ce2599389325d3414e9ad2876b4754';
 
-const { connectors } = getDefaultWallets({
-  appName: 'WriteXchange',
-  projectId: walletConnectProjectId,
-});
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Recommended',
+    wallets: [
+      metaMaskWallet({ projectId: walletConnectProjectId, chains: [mainnet, polygon] }),
+      coinbaseWallet({ appName: 'WriteXchange', chains: [mainnet, polygon] })
+    ],
+  },
+]);
 
 export const config = createConfig({
   chains: [mainnet, polygon],
