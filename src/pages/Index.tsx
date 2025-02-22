@@ -15,7 +15,7 @@ const Index = () => {
     {
       id: 1,
       title: "Professional Website Content Writing",
-      description: "Need professional content writing services for a 5-page business website. Topics include Home, About Us, Services, Portfolio, and Contact pages. Expert writer with B2B experience required.",
+      description: "Get Professional Website Content Writing services ",
       budget: "0.15 ETH",
       status: "open" as const,
       address: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045"
@@ -23,7 +23,7 @@ const Index = () => {
     {
       id: 2,
       title: "SEO Blog Posts Package - 10 Articles",
-      description: "Looking for an experienced SEO content writer to create 10 blog posts (2000 words each) about digital marketing topics. Must have knowledge of SEO best practices and keyword optimization.",
+      description: "get SEO Blog Posts Package - 10 Articles services",
       budget: "0.25 ETH",
       status: "open" as const,
       address: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045"
@@ -31,7 +31,7 @@ const Index = () => {
     {
       id: 3,
       title: "Product Description Writing",
-      description: "Need engaging product descriptions for an e-commerce store with 50 products in the fashion category. Each description should be 150-200 words with compelling sales copy.",
+      description: "get Product Description Writing services",
       budget: "0.2 ETH",
       status: "open" as const,
       address: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045"
