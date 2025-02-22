@@ -10,15 +10,18 @@ import { mainnet, polygon } from 'wagmi/chains';
 
 const projectId = '45ce2599389325d3414e9ad2876b4754'; // WalletConnect Project ID
 
-const connectors = connectorsForWallets([
+const connectors = connectorsForWallets(
+  [
+    {
+      groupName: 'Recommended',
+      wallets: [metaMaskWallet, coinbaseWallet]
+    }
+  ],
   {
-    groupName: 'Recommended',
-    wallets: [
-      ({ projectId }) => metaMaskWallet({ projectId }),
-      ({ projectId }) => coinbaseWallet({ appName: 'WriteXchange', projectId })
-    ],
+    appName: 'WriteXchange',
+    projectId
   }
-]);
+);
 
 export const wagmiConfig = createConfig({
   chains: [mainnet, polygon],
