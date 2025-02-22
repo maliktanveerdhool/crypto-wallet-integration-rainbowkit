@@ -2,7 +2,7 @@
 import '@rainbow-me/rainbowkit/styles.css';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { WagmiConfig } from 'wagmi';
-import { wagmiConfig, chains } from '@/lib/web3Config';
+import { config, chains } from '@/lib/web3Config';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
@@ -14,8 +14,8 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <WagmiConfig config={wagmiConfig}>
-    <RainbowKitProvider chains={chains}>
+  <WagmiConfig config={config}>
+    <RainbowKitProvider coolMode>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Toaster />

@@ -1,24 +1,25 @@
 
 import { getDefaultWallets } from '@rainbow-me/rainbowkit';
-import { configureChains, createConfig } from 'wagmi';
+import { http } from 'viem';
+import { createConfig } from 'wagmi';
 import { mainnet, polygon } from 'wagmi/chains';
-import { publicProvider } from 'wagmi/providers/public';
 
-const { chains, publicClient } = configureChains(
-  [mainnet, polygon],
-  [publicProvider()]
-);
+// Create wagmi config
+const walletConnectProjectId = 'your-project-id'; // Replace with actual WalletConnect Project ID
 
-const { connectors } = getDefaultWallets({
+const { wallets } = getDefaultWallets({
   appName: 'WriteXchange',
-  projectId: 'your-project-id', // Replace with actual project ID
-  chains,
+  projectId: walletConnectProjectId,
+  chains: [mainnet, polygon],
 });
 
-export const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors,
-  publicClient,
+export const config = createConfig({
+  chains: [mainnet, polygon],
+  transports: {
+    [mainnet.id]: http(),
+    [polygon.id]: http(),
+  },
+  connectors: wallets,
 });
 
-export { chains };
+export const chains = [mainnet, polygon];
