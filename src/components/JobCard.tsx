@@ -39,7 +39,7 @@ export const JobCard = ({ title, description, budget, status, onSubmitProposal }
           className="w-full"
           disabled={!onSubmitProposal}
         >
-          {onSubmitProposal ? 'Buy Now' : 'Connect Wallet to Submit'}
+          {onSubmitProposal ? 'SubmitProposal' : 'Connect Wallet to Submit'}
         </Button>
       )}
     </Card>
