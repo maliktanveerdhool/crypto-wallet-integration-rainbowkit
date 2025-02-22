@@ -7,10 +7,9 @@ import { mainnet, polygon } from 'wagmi/chains';
 // Create wagmi config
 const walletConnectProjectId = 'your-project-id'; // Replace with actual WalletConnect Project ID
 
-const { wallets } = getDefaultWallets({
+const { connectors } = getDefaultWallets({
   appName: 'WriteXchange',
   projectId: walletConnectProjectId,
-  chains: [mainnet, polygon],
 });
 
 export const config = createConfig({
@@ -19,7 +18,7 @@ export const config = createConfig({
     [mainnet.id]: http(),
     [polygon.id]: http(),
   },
-  connectors: wallets,
+  connectors,
 });
 
 export const chains = [mainnet, polygon];
