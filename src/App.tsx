@@ -11,12 +11,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
+// Create a client
 const queryClient = new QueryClient();
 
 const App = () => (
-  <WagmiConfig config={config}>
-    <RainbowKitProvider chains={chains}>
-      <QueryClientProvider client={queryClient}>
+  <QueryClientProvider client={queryClient}>
+    <WagmiConfig config={config}>
+      <RainbowKitProvider modalSize="compact">
         <TooltipProvider>
           <Toaster />
           <Sonner />
@@ -27,9 +28,9 @@ const App = () => (
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
-      </QueryClientProvider>
-    </RainbowKitProvider>
-  </WagmiConfig>
+      </RainbowKitProvider>
+    </WagmiConfig>
+  </QueryClientProvider>
 );
 
 export default App;
