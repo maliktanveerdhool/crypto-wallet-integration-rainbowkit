@@ -14,11 +14,14 @@ const connectors = connectorsForWallets([
   {
     groupName: 'Recommended',
     wallets: [
-      metaMaskWallet({ projectId }),
-      coinbaseWallet({ appName: 'WriteXchange' })
+      metaMaskWallet({ projectId, chains: [mainnet, polygon] }),
+      coinbaseWallet({ appName: 'WriteXchange', chains: [mainnet, polygon] })
     ],
   },
-]);
+], {
+  appName: 'WriteXchange',
+  projectId
+});
 
 export const wagmiConfig = createConfig({
   chains: [mainnet, polygon],
