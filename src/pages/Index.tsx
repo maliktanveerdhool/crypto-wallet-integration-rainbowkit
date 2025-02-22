@@ -62,7 +62,9 @@ const Index = () => {
             <JobCard
               key={job.id}
               {...job}
-              onSubmitProposal={isConnected && job.status === 'open' ? () => handleSubmitProposal(job.id) : undefined}
+              onSubmitProposal={job.status === 'open' ? 
+                (isConnected ? () => handleSubmitProposal(job.id) : undefined) 
+                : undefined}
             />
           ))}
         </div>

@@ -13,7 +13,7 @@ interface JobCardProps {
 
 export const JobCard = ({ title, description, budget, status, onSubmitProposal }: JobCardProps) => {
   return (
-    <Card className="p-6 transition-all hover:shadow-md scale-in">
+    <Card className="p-6 transition-all hover:shadow-md">
       <div className="flex justify-between items-start mb-4">
         <div>
           <h3 className="text-lg font-semibold mb-1">{title}</h3>
@@ -33,8 +33,12 @@ export const JobCard = ({ title, description, budget, status, onSubmitProposal }
         {description}
       </p>
       {status === 'open' && (
-        <Button onClick={onSubmitProposal} className="w-full">
-          Submit Proposal
+        <Button 
+          onClick={onSubmitProposal} 
+          className="w-full"
+          disabled={!onSubmitProposal}
+        >
+          {onSubmitProposal ? 'Submit Proposal' : 'Connect Wallet to Submit'}
         </Button>
       )}
     </Card>
