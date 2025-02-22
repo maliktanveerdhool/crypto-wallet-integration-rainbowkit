@@ -2,15 +2,14 @@
 import { Layout } from "@/components/Layout";
 import { JobCard } from "@/components/JobCard";
 import { Button } from "@/components/ui/button";
-import { useAccount, useWalletClient, useSendTransaction } from 'wagmi';
+import { useAccount, useSendTransaction } from 'wagmi';
 import { useState } from "react";
 import { toast } from "sonner";
 import { parseEther } from 'viem';
 
 const Index = () => {
   const { isConnected } = useAccount();
-  const { data: walletClient } = useWalletClient();
-  const { sendTransaction } = useSendTransaction();
+  const { sendTransactionAsync } = useSendTransaction();
 
   const [jobs] = useState([
     {
@@ -19,7 +18,7 @@ const Index = () => {
       description: "Looking for an experienced writer to create a comprehensive blog post about Web3 technology and its implications for the future of the internet.",
       budget: "0.1 ETH",
       status: "open" as const,
-      address: "0x123..." // This should be the actual wallet address of the job poster
+      address: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045" // Example address (Vitalik's address)
     },
     {
       id: 2,
@@ -27,7 +26,7 @@ const Index = () => {
       description: "Need a professional writer to create a detailed white paper for our new DeFi protocol. Must have experience in cryptocurrency and financial writing.",
       budget: "0.3 ETH",
       status: "in-progress" as const,
-      address: "0x456..." // This should be the actual wallet address of the job poster
+      address: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045" // Example address (Vitalik's address)
     },
   ]);
 
@@ -43,15 +42,20 @@ const Index = () => {
     try {
       const ethAmount = job.budget.replace(" ETH", "");
       
-      await sendTransaction({
-        to: job.address,
+      // Using sendTransactionAsync to properly handle the promise
+      const tx = await sendTransactionAsync({
+        to: job.address as `0x${string}`,
         value: parseEther(ethAmount),
       });
 
-      toast.success("Transaction initiated! Please confirm in your wallet.");
-    } catch (error) {
+      toast.success("Please confirm the transaction in your wallet");
+      
+      // Wait for transaction confirmation
+      await tx.wait();
+      toast.success("Transaction confirmed!");
+    } catch (error: any) {
       console.error('Transaction error:', error);
-      toast.error("Transaction failed. Please try again.");
+      toast.error(error?.message || "Transaction failed. Please try again.");
     }
   };
 
