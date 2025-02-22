@@ -74,7 +74,7 @@ return (
 
     >
 
-      {onSubmitProposal ? 'SubmitProposal' : 'Connect Wallet to Submit'}
+      {onSubmitProposal ? 'Buy Now' : 'Connect Wallet to Submit'}
 
     </Button>
 
