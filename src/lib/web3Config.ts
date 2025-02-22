@@ -8,7 +8,7 @@ import { http } from 'viem';
 import { createConfig } from 'wagmi';
 import { mainnet, polygon } from 'wagmi/chains';
 
-const projectId = '45ce2599389325d3414e9ad2876b4754'; // WalletConnect Project ID
+const projectId = 'ba20054458ba0c5ff57646a40d166982'; // WalletConnect Project ID
 
 const connectors = connectorsForWallets(
   [
